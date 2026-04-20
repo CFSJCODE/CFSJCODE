@@ -1,70 +1,81 @@
-<!--
-**CFSJCODE/CFSJCODE** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+# Cláudio Francisco Dos Santos Júnior
 
-Here are some ideas to get you started:
+**Engenharia de Computação | Sistemas Embarcados | Infraestrutura de TI | Robótica**
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+---
 
-👨‍💻 Sobre Mim
+## 📌 Sobre Mim
 
-Sou um apaixonado por tecnologia e inovação, atualmente cursando Engenharia de Computação na PUC Minas. 
-Meu objetivo é unir a teoria acadêmica com a prática do mercado para criar e implementar soluções tecnológicas que sejam ao mesmo tempo eficientes, acessíveis e inovadoras.
+Graduando em Engenharia de Computação pela **PUC Minas**, com foco na convergência entre hardware, sistemas embarcados e infraestrutura de TI.  
 
-Com uma base sólida em infraestrutura de TI e um grande entusiasmo por robótica educacional, fundei a CFSJ TECH para oferecer suporte técnico de excelência e consultoria especializada para pessoas e pequenos negócios.
+Minha atuação está centrada na tradução de fundamentos teóricos de engenharia em **soluções tecnológicas eficientes, escaláveis e com elevado rigor técnico**.  
 
-🎓 Cursando Engenharia de Computação na PUC Minas (previsão 2025).
+Atuo de forma independente por meio da **CFSJ TECH**, oferecendo suporte técnico, consultoria em infraestrutura e desenvolvimento de projetos, com abordagem orientada à **análise e resolução sistemática de problemas**.
 
-🚀 CEO e fundador da CFSJ TECH.
+---
 
-🤖 Investidor e entusiasta de equipes de robótica da FIRST LEGO League (FLL).
+## ⚙️ Áreas de Atuação e Competências
 
-🔧 Especialista em suporte técnico, manutenção de hardware e infraestrutura de redes.
+- **Sistemas Embarcados e IoT**  
+  Prototipagem de hardware e desenvolvimento de firmware utilizando microcontroladores, com ênfase em arquitetura Arduino e família ESP32.
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- **Infraestrutura de TI e Redes**  
+  Dimensionamento de redes, cabeamento estruturado e manutenção de ativos de infraestrutura.
 
-🚀 O Que Eu Faço? (Serviços):
+- **Hardware**  
+  Montagem, manutenção avançada e diagnóstico de sistemas computacionais.
 
-Através da CFSJ TECH, lidero projetos e ofereço uma gama de serviços para otimizar e proteger seu ambiente tecnológico:
+- **Robótica Educacional**  
+  Integração de hardware e software aplicada à educação tecnológica, com base em metodologias STEM e plataformas como LEGO Mindstorms.
 
-Suporte Técnico Completo: Soluções remotas e presenciais para problemas de hardware, software e redes.
+---
 
-Montagem e Manutenção de Computadores: Serviços de montagem, manutenção preventiva e corretiva para garantir o máximo desempenho.
+## 🛠️ Serviços e Atuação Profissional
 
-Consultoria de TI e Orçamentos: Análise e implementação de sistemas de CFTV, cabeamento estruturado e assessoria para a compra de equipamentos.
+No contexto da **CFSJ TECH**, executo serviços técnicos voltados à **otimização, confiabilidade e segurança de infraestruturas tecnológicas**:
 
-Desenvolvimento Web: Criação de sites institucionais e soluções web estáticas, como o projeto da equipe Teen Wolf.
+- **Suporte Técnico (Níveis 1 e 2)**  
+  Diagnóstico e resolução de incidentes em hardware e software (remoto e presencial).
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- **Engenharia de Infraestrutura**  
+  Consultoria, análise de viabilidade e implementação de soluções de CFTV e redes estruturadas.
 
-💼 Experiência e Projetos em Destaque:
+- **Manutenção Computacional**  
+  Montagem sob demanda e definição de rotinas de manutenção preventiva e corretiva.
 
-CEO na CFSJ TECH: Liderança em projetos de TI, desde o suporte técnico individual até a consultoria para pequenas empresas.
+- **Desenvolvimento Web**  
+  Estruturação de interfaces estáticas e desenvolvimento de aplicações institucionais.
 
-Suporte Técnico no SESI: Gestão de infraestrutura de TI e suporte a equipes de robótica FIRST LEGO League (FLL).
+---
 
-Auxiliar de Tutor de Robótica (CodeBuddys): Ensino de programação e robótica com Lego Mindstorms e Arduino.
+## 💼 Experiência Profissional
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- **CFSJ TECH (Atuação Independente)**  
+  Execução de projetos de infraestrutura tecnológica e prestação de consultoria para usuários e pequenas empresas.
 
-Meus Repositórios Principais:
+- **SESI — Suporte Técnico de Infraestrutura**  
+  Gestão operacional do parque computacional e suporte técnico contínuo às equipes de robótica (FIRST LEGO League - FLL).
 
-🐺 Teen-Wolf: Site institucional que desenvolvi para a equipe de robótica FLL Teen Wolf.
+- **CodeBuddys — Auxiliar de Tutor em Robótica**  
+  Mediação técnico-pedagógica no ensino de lógica de programação, Arduino e robótica educacional.
 
-🔧 CFSJ-TECH: Repositório com projetos e informações sobre minha empresa de soluções em TI.
+---
 
-💡 Arduino: Coleção de projetos, tutoriais e códigos sobre Arduino.
+## 🚀 Projetos em Destaque
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- **Teen-Wolf**  
+  Desenvolvimento front-end de plataforma institucional para equipe de robótica da FIRST LEGO League (FLL).
 
-📫 Vamos Conectar!
-Estou sempre aberto a novas oportunidades, colaborações e desafios. Vamos transformar ideias em realidade juntos!
+- **CFSJ-TECH**  
+  Repositório central contendo arquitetura, documentação e projetos desenvolvidos no escopo da operação CFSJ TECH.
 
-LinkedIn: www.linkedin.com/in/claudio-francisco-dos-santos-junior
+- **Arduino**  
+  Acervo técnico de prototipagem eletrônica, incluindo documentação e códigos para microcontroladores.
+
+---
+
+## 📫 Contato
+
+- **LinkedIn:** www.linkedin.com/in/claudio-francisco-dos-santos-junior
+
+---
