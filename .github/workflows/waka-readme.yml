@@ -21,21 +21,95 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Update README with WakaTime statistics
-        uses: athul/waka-readme@master
+      - name: Clone profile repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
 
-        with:
+      - name: Fetch WakaTime data and update README
+        env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+        run: |
+          cd repo
+          python3 - <<'PY'
+          import base64
+          import json
+          import os
+          import re
+          import urllib.request
 
-          SHOW_TITLE: true
-          SECTION_NAME: waka
+          api_key = os.environ.get("WAKATIME_API_KEY", "").strip()
+          if not api_key:
+              raise SystemExit("WAKATIME_API_KEY secret is not configured.")
 
-          TIME_RANGE: last_30_days
-          LANG_COUNT: 8
+          url = "https://wakatime.com/api/v1/users/current/stats/last_30_days"
+          request = urllib.request.Request(url)
+          token = base64.b64encode(api_key.encode("utf-8")).decode("ascii")
+          request.add_header("Authorization", f"Basic {token}")
+          request.add_header("Accept", "application/json")
 
-          SHOW_TIME: true
-          SHOW_TOTAL: true
+          with urllib.request.urlopen(request, timeout=30) as response:
+              payload = json.load(response)
 
-          STOP_AT_OTHER: false
+          data = payload.get("data", {})
+          languages = data.get("languages", [])[:8]
+          total = data.get("human_readable_total_including_other_language") or data.get("human_readable_total") or "0 secs"
+          start = str(data.get("start", ""))[:10]
+          end = str(data.get("end", ""))[:10]
 
-          COMMIT_MESSAGE: "chore: update WakaTime metrics"
+          if not languages:
+              body = "_Ainda não há atividade de programação suficiente registrada pelo WakaTime neste período._"
+          else:
+              longest = max(len(str(lang.get("name", ""))) for lang in languages)
+              rows = []
+              for lang in languages:
+                  name = str(lang.get("name", "Unknown"))
+                  text = str(lang.get("text", "0 secs"))
+                  percent = float(lang.get("percent", 0) or 0)
+                  filled = max(0, min(25, round(percent / 4)))
+                  bar = "█" * filled + "░" * (25 - filled)
+                  rows.append(f"{name:<{longest}}   {text:>12}   {bar}   {percent:5.2f} %")
+              body = "```text\n" + "\n".join(rows) + "\n```"
+
+          range_line = f"**Período:** {start} → {end}  " if start and end else ""
+          generated = (
+              f"{range_line}\n"
+              f"**Tempo total de desenvolvimento:** {total}\n\n"
+              f"{body}"
+          ).strip()
+
+          path = "README.md"
+          with open(path, "r", encoding="utf-8") as file:
+              readme = file.read()
+
+          pattern = re.compile(
+              r"<!--START_SECTION:waka-->.*?<!--END_SECTION:waka-->",
+              flags=re.DOTALL,
+          )
+          replacement = (
+              "<!--START_SECTION:waka-->\n"
+              + generated
+              + "\n<!--END_SECTION:waka-->"
+          )
+
+          updated, count = pattern.subn(replacement, readme, count=1)
+          if count != 1:
+              raise SystemExit("WakaTime markers were not found exactly once in README.md.")
+
+          with open(path, "w", encoding="utf-8", newline="\n") as file:
+              file.write(updated)
+          PY
+
+      - name: Commit README update
+        run: |
+          cd repo
+          if git diff --quiet -- README.md; then
+            echo "README is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update WakaTime metrics"
+          git push origin HEAD:main
