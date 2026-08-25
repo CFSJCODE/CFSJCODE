@@ -168,6 +168,9 @@ O GitHub representa o resultado dos projetos. O **WakaTime registra o processo d
 ### WakaTime — Linguagens por Tempo de Desenvolvimento
 
 <!--START_SECTION:waka-->
+**Tempo total de desenvolvimento:** 0 secs
+
+_Ainda não há atividade de programação suficiente registrada pelo WakaTime neste período._
 <!--END_SECTION:waka-->
 
 <sub>Esta seção é atualizada automaticamente utilizando dados do WakaTime.</sub>
