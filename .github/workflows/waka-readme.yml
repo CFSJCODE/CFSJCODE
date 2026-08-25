@@ -3,6 +3,12 @@ name: WakaTime Metrics
 on:
   workflow_dispatch:
 
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/waka-readme.yml"
+
   schedule:
     - cron: "0 3 * * *"
 
