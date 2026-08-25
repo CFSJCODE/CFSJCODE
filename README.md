@@ -168,9 +168,19 @@ O GitHub representa o resultado dos projetos. O **WakaTime registra o processo d
 ### WakaTime — Linguagens por Tempo de Desenvolvimento
 
 <!--START_SECTION:waka-->
-**Tempo total de desenvolvimento:** 0 secs
+**Período:** 2026-07-26 → 2026-08-25  
+**Tempo total de desenvolvimento:** 39 hrs 43 mins
 
-_Ainda não há atividade de programação suficiente registrada pelo WakaTime neste período._
+```text
+TypeScript   11 hrs 10 mins   ███████░░░░░░░░░░░░░░░░░░   28.14 %
+C++          6 hrs 11 mins   ████░░░░░░░░░░░░░░░░░░░░░   15.60 %
+Other        5 hrs 5 mins   ███░░░░░░░░░░░░░░░░░░░░░░   12.80 %
+Python              4 hrs   ███░░░░░░░░░░░░░░░░░░░░░░   10.08 %
+Markdown     3 hrs 16 mins   ██░░░░░░░░░░░░░░░░░░░░░░░    8.23 %
+PowerShell   2 hrs 5 mins   █░░░░░░░░░░░░░░░░░░░░░░░░    5.28 %
+Dart         1 hr 23 mins   █░░░░░░░░░░░░░░░░░░░░░░░░    3.51 %
+JSON         1 hr 14 mins   █░░░░░░░░░░░░░░░░░░░░░░░░    3.14 %
+```
 <!--END_SECTION:waka-->
 
 <sub>Esta seção é atualizada automaticamente utilizando dados do WakaTime.</sub>
