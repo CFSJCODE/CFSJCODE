@@ -1,483 +1,287 @@
-name: WakaTime Metrics
+name: Profile Metrics
 
 on:
   workflow_dispatch:
 
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/waka-readme.yml"
+
   schedule:
-    # Executa diariamente às 03:00 UTC
-    # Aproximadamente 00:00 em Brasília (UTC-3)
+    # 03:00 UTC = aproximadamente 00:00 em Brasília (UTC-3)
     - cron: "0 3 * * *"
 
 permissions:
   contents: write
 
+concurrency:
+  group: profile-metrics
+  cancel-in-progress: true
+
 jobs:
-  update-readme:
-
-    name: Update WakaTime Metrics
-
+  update-metrics:
+    name: Generate profile metrics
     runs-on: ubuntu-latest
 
     steps:
-
-      # ============================================================
-      # 1. Baixa o repositório do perfil
-      # ============================================================
-
       - name: Checkout repository
         uses: actions/checkout@v4
-
         with:
           fetch-depth: 0
 
-      # ============================================================
-      # 2. Consulta a API do WakaTime
-      #    e gera a seção visual do README
-      # ============================================================
-
-      - name: Fetch WakaTime data and update README
+      - name: Generate WakaTime and GitHub SVG cards
         env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_LOGIN: CFSJCODE
         run: |
-
           python3 - <<'PY'
-
           import base64
           import json
           import os
-          import re
+          import urllib.parse
           import urllib.request
+          from pathlib import Path
+          from xml.sax.saxutils import escape
 
+          ASSETS = Path("assets")
+          ASSETS.mkdir(exist_ok=True)
 
-          # ========================================================
-          # CONFIGURAÇÕES
-          # ========================================================
+          W = 920
+          FONT = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif"
+          MONO = "ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace"
 
-          README_PATH = "README.md"
+          COLORS = {
+              "TypeScript": "#3178C6",
+              "JavaScript": "#F1E05A",
+              "C++": "#00599C",
+              "C": "#555555",
+              "Python": "#3776AB",
+              "Dart": "#0175C2",
+              "Markdown": "#083FA1",
+              "PowerShell": "#5391FE",
+              "HTML": "#E34C26",
+              "CSS": "#563D7C",
+              "Shell": "#89E051",
+              "Java": "#B07219",
+              "Kotlin": "#A97BFF",
+              "Rust": "#DEA584",
+              "Go": "#00ADD8",
+              "PHP": "#4F5D95",
+              "JSON": "#6E7681",
+              "Other": "#6E7681",
+          }
 
-          START_MARKER = "<!--START_SECTION:waka-->"
-          END_MARKER = "<!--END_SECTION:waka-->"
+          def style_block():
+              return f"""
+              <style>
+                .bg {{ fill: #ffffff; stroke: #d0d7de; }}
+                .title {{ fill: #1f2328; font-family: {FONT}; font-weight: 700; }}
+                .text {{ fill: #24292f; font-family: {FONT}; }}
+                .muted {{ fill: #656d76; font-family: {FONT}; }}
+                .mono {{ fill: #24292f; font-family: {MONO}; }}
+                .track {{ fill: #eaeef2; }}
+                .box {{ fill: #f6f8fa; stroke: #d8dee4; }}
+                @media (prefers-color-scheme: dark) {{
+                  .bg {{ fill: #0d1117; stroke: #30363d; }}
+                  .title {{ fill: #f0f6fc; }}
+                  .text {{ fill: #c9d1d9; }}
+                  .muted {{ fill: #8b949e; }}
+                  .mono {{ fill: #c9d1d9; }}
+                  .track {{ fill: #21262d; }}
+                  .box {{ fill: #161b22; stroke: #30363d; }}
+                }}
+              </style>
+              """
 
-          TIME_RANGE = "last_30_days"
+          def fmt_date(value):
+              raw = str(value or "")[:10]
+              parts = raw.split("-")
+              if len(parts) == 3:
+                  return f"{parts[2]}/{parts[1]}/{parts[0]}"
+              return raw
 
-          MAX_LANGUAGES = 8
+          def request_json(url, headers=None, timeout=30):
+              req = urllib.request.Request(url)
+              for key, value in (headers or {}).items():
+                  req.add_header(key, value)
+              with urllib.request.urlopen(req, timeout=timeout) as response:
+                  return json.load(response)
 
-          BAR_WIDTH = 24
+          def write_svg(name, body, height):
+              svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{height}" viewBox="0 0 {W} {height}" role="img">
+              {style_block()}
+              <rect class="bg" x="0.5" y="0.5" width="{W-1}" height="{height-1}" rx="12"/>
+              {body}
+              </svg>'''
+              (ASSETS / name).write_text(svg, encoding="utf-8", newline="\n")
 
+          # ---------------------------------------------------------
+          # WakaTime
+          # ---------------------------------------------------------
+          waka_key = os.environ.get("WAKATIME_API_KEY", "").strip()
+          if not waka_key:
+              raise SystemExit("Secret WAKATIME_API_KEY não configurado.")
 
-          # ========================================================
-          # CHAVE DO WAKATIME
-          # ========================================================
+          basic = base64.b64encode(waka_key.encode("utf-8")).decode("ascii")
+          waka = request_json(
+              "https://wakatime.com/api/v1/users/current/stats/last_30_days",
+              headers={
+                  "Authorization": f"Basic {basic}",
+                  "Accept": "application/json",
+                  "User-Agent": "CFSJCODE-Profile-Metrics",
+              },
+          ).get("data", {})
 
-          api_key = os.environ.get(
-              "WAKATIME_API_KEY",
-              ""
-          ).strip()
-
-
-          if not api_key:
-
-              raise SystemExit(
-                  "ERRO: o secret WAKATIME_API_KEY "
-                  "não está configurado no GitHub."
-              )
-
-
-          # ========================================================
-          # CONSULTA À API DO WAKATIME
-          # ========================================================
-
-          url = (
-              "https://wakatime.com/api/v1/"
-              f"users/current/stats/{TIME_RANGE}"
-          )
-
-
-          request = urllib.request.Request(url)
-
-
-          token = base64.b64encode(
-              api_key.encode("utf-8")
-          ).decode("ascii")
-
-
-          request.add_header(
-              "Authorization",
-              f"Basic {token}"
-          )
-
-
-          request.add_header(
-              "Accept",
-              "application/json"
-          )
-
-
-          request.add_header(
-              "User-Agent",
-              "CFSJCODE-WakaTime-README"
-          )
-
-
-          try:
-
-              with urllib.request.urlopen(
-                  request,
-                  timeout=30
-              ) as response:
-
-                  payload = json.load(response)
-
-          except Exception as error:
-
-              raise SystemExit(
-                  f"Erro consultando WakaTime: {error}"
-              )
-
-
-          # ========================================================
-          # EXTRAÇÃO DOS DADOS
-          # ========================================================
-
-          data = payload.get("data", {})
-
-
-          languages = data.get(
-              "languages",
-              []
-          )[:MAX_LANGUAGES]
-
-
+          languages = waka.get("languages", [])[:8]
           total = (
-              data.get(
-                  "human_readable_total_including_other_language"
-              )
-              or data.get(
-                  "human_readable_total"
-              )
+              waka.get("human_readable_total_including_other_language")
+              or waka.get("human_readable_total")
               or "0 secs"
           )
+          start = fmt_date(waka.get("start"))
+          end = fmt_date(waka.get("end"))
 
+          row_h = 50
+          height = 128 + max(1, len(languages)) * row_h + 28
+          parts = [
+              '<text class="title" x="30" y="36" font-size="20">WakaTime — Atividade de Desenvolvimento</text>',
+              f'<text class="muted" x="30" y="61" font-size="13">{escape(start)} — {escape(end)} · últimos 30 dias</text>',
+              '<rect class="box" x="690" y="22" width="200" height="58" rx="9"/>',
+              '<text class="muted" x="708" y="43" font-size="10" font-weight="600">TEMPO TOTAL RASTREADO</text>',
+              f'<text class="title" x="708" y="66" font-size="17">{escape(total)}</text>',
+          ]
 
-          start = str(
-              data.get("start", "")
-          )[:10]
-
-
-          end = str(
-              data.get("end", "")
-          )[:10]
-
-
-          # ========================================================
-          # FUNÇÃO PARA CONSTRUIR AS BARRAS
-          # ========================================================
-
-          def make_bar(percent):
-
-              percent = max(
-                  0.0,
-                  min(
-                      100.0,
-                      float(percent)
-                  )
-              )
-
-
-              filled = round(
-                  BAR_WIDTH *
-                  percent /
-                  100
-              )
-
-
-              empty = (
-                  BAR_WIDTH -
-                  filled
-              )
-
-
-              return (
-                  "█" * filled +
-                  "░" * empty
-              )
-
-
-          # ========================================================
-          # CONSTRUÇÃO DA SEÇÃO DO WAKATIME
-          # ========================================================
-
-          lines = []
-
-
-          lines.append(
-              "### WakaTime — Atividade de Desenvolvimento"
-          )
-
-
-          lines.append("")
-
-
-          if start and end:
-
-              lines.append(
-                  f"> **Período:** {start} → {end}  "
-              )
-
-
-          lines.append(
-              "> **Tempo total de desenvolvimento:** "
-              f"**{total}**"
-          )
-
-
-          lines.append("")
-
-
-          if languages:
-
-
-              lines.append(
-                  "| Linguagem | Tempo | Distribuição | Uso |"
-              )
-
-
-              lines.append(
-                  "|:---|---:|:---|---:|"
-              )
-
-
-              for language in languages:
-
-
-                  name = str(
-                      language.get(
-                          "name",
-                          "Unknown"
-                      )
-                  )
-
-
-                  time = str(
-                      language.get(
-                          "text",
-                          "0 secs"
-                      )
-                  )
-
-
-                  percent = float(
-                      language.get(
-                          "percent",
-                          0
-                      )
-                      or 0
-                  )
-
-
-                  bar = make_bar(
-                      percent
-                  )
-
-
-                  lines.append(
-
-                      f"| **{name}** "
-
-                      f"| {time} "
-
-                      f"| `{bar}` "
-
-                      f"| **{percent:.2f}%** |"
-
-                  )
-
-
+          if not languages:
+              parts.append('<text class="muted" x="30" y="120" font-size="14">Nenhuma atividade registrada no período.</text>')
           else:
+              max_bar = 430
+              for i, lang in enumerate(languages):
+                  y = 112 + i * row_h
+                  name = str(lang.get("name", "Unknown"))
+                  duration = str(lang.get("text", "0 secs"))
+                  percent = max(0.0, min(100.0, float(lang.get("percent", 0) or 0)))
+                  color = COLORS.get(name, "#6E7681")
+                  fill_w = max(2, max_bar * percent / 100.0) if percent > 0 else 0
 
+                  parts.extend([
+                      f'<circle cx="38" cy="{y+7}" r="5" fill="{color}"/>',
+                      f'<text class="text" x="52" y="{y+12}" font-size="13" font-weight="600">{escape(name)}</text>',
+                      f'<text class="muted" x="190" y="{y+12}" font-size="12">{escape(duration)}</text>',
+                      f'<rect class="track" x="330" y="{y}" width="{max_bar}" height="14" rx="7"/>',
+                      f'<rect x="330" y="{y}" width="{fill_w:.1f}" height="14" rx="7" fill="{color}"/>',
+                      f'<text class="mono" x="785" y="{y+12}" font-size="12">{percent:5.2f}%</text>',
+                  ])
 
-              lines.append(
-                  "_Ainda não há atividade de programação "
-                  "suficiente registrada pelo WakaTime "
-                  "neste período._"
-              )
+          write_svg("wakatime.svg", "\n".join(parts), height)
 
+          # ---------------------------------------------------------
+          # GitHub public metrics
+          # ---------------------------------------------------------
+          gh_token = os.environ.get("GH_TOKEN", "").strip()
+          login = os.environ.get("GITHUB_LOGIN", "CFSJCODE").strip()
+          gh_headers = {
+              "Accept": "application/vnd.github+json",
+              "User-Agent": "CFSJCODE-Profile-Metrics",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+          if gh_token:
+              gh_headers["Authorization"] = f"Bearer {gh_token}"
 
-          generated_section = "\n".join(
-              lines
+          user = request_json(f"https://api.github.com/users/{urllib.parse.quote(login)}", gh_headers)
+          repos = request_json(
+              f"https://api.github.com/users/{urllib.parse.quote(login)}/repos?per_page=100&type=owner&sort=updated",
+              gh_headers,
           )
 
+          own_public = [repo for repo in repos if not repo.get("fork")]
+          stars = sum(int(repo.get("stargazers_count", 0) or 0) for repo in own_public)
+          forks = sum(int(repo.get("forks_count", 0) or 0) for repo in own_public)
 
-          # ========================================================
-          # ABRIR README
-          # ========================================================
+          overview_h = 220
+          metrics = [
+              ("Repositórios públicos", str(user.get("public_repos", 0))),
+              ("Seguidores", str(user.get("followers", 0))),
+              ("Stars recebidas", str(stars)),
+              ("Forks", str(forks)),
+          ]
+          overview = [
+              '<text class="title" x="30" y="38" font-size="20">GitHub — Visão Geral</text>',
+              f'<text class="muted" x="30" y="62" font-size="13">@{escape(login)} · métricas públicas</text>',
+          ]
+          box_w = 202
+          gap = 18
+          for i, (label, value) in enumerate(metrics):
+              x = 30 + i * (box_w + gap)
+              overview.extend([
+                  f'<rect class="box" x="{x}" y="92" width="{box_w}" height="92" rx="10"/>',
+                  f'<text class="muted" x="{x+18}" y="120" font-size="11" font-weight="600">{escape(label.upper())}</text>',
+                  f'<text class="title" x="{x+18}" y="159" font-size="27">{escape(value)}</text>',
+              ])
+          write_svg("github-overview.svg", "\n".join(overview), overview_h)
 
-          with open(
-              README_PATH,
-              "r",
-              encoding="utf-8"
-          ) as file:
+          # Aggregate language bytes from original public repositories.
+          language_totals = {}
+          for repo in own_public:
+              full_name = repo.get("full_name")
+              if not full_name:
+                  continue
+              encoded = urllib.parse.quote(full_name, safe="/")
+              try:
+                  lang_data = request_json(
+                      f"https://api.github.com/repos/{encoded}/languages",
+                      gh_headers,
+                      timeout=20,
+                  )
+              except Exception as exc:
+                  print(f"Aviso: não foi possível ler linguagens de {full_name}: {exc}")
+                  continue
+              for language, amount in lang_data.items():
+                  language_totals[language] = language_totals.get(language, 0) + int(amount or 0)
 
-              readme = file.read()
+          total_bytes = sum(language_totals.values())
+          top = sorted(language_totals.items(), key=lambda item: item[1], reverse=True)[:8]
+          lang_h = 128 + max(1, len(top)) * row_h + 28
+          lang_parts = [
+              '<text class="title" x="30" y="36" font-size="20">GitHub — Linguagens dos Repositórios</text>',
+              '<text class="muted" x="30" y="61" font-size="13">Distribuição agregada por bytes · repositórios públicos próprios · forks excluídos</text>',
+          ]
 
+          if not top or total_bytes <= 0:
+              lang_parts.append('<text class="muted" x="30" y="120" font-size="14">Nenhum dado de linguagem disponível.</text>')
+          else:
+              max_bar = 430
+              for i, (name, amount) in enumerate(top):
+                  y = 112 + i * row_h
+                  percent = amount * 100.0 / total_bytes
+                  color = COLORS.get(name, "#6E7681")
+                  fill_w = max(2, max_bar * percent / 100.0) if percent > 0 else 0
+                  lang_parts.extend([
+                      f'<circle cx="38" cy="{y+7}" r="5" fill="{color}"/>',
+                      f'<text class="text" x="52" y="{y+12}" font-size="13" font-weight="600">{escape(name)}</text>',
+                      f'<rect class="track" x="250" y="{y}" width="{max_bar}" height="14" rx="7"/>',
+                      f'<rect x="250" y="{y}" width="{fill_w:.1f}" height="14" rx="7" fill="{color}"/>',
+                      f'<text class="mono" x="710" y="{y+12}" font-size="12">{percent:5.2f}%</text>',
+                  ])
 
-          # ========================================================
-          # LOCALIZAR A SEÇÃO WAKATIME
-          # ========================================================
+          write_svg("github-languages.svg", "\n".join(lang_parts), lang_h)
 
-          pattern = re.compile(
-
-              re.escape(
-                  START_MARKER
-              )
-
-              +
-
-              r".*?"
-
-              +
-
-              re.escape(
-                  END_MARKER
-              ),
-
-              flags=re.DOTALL
-
-          )
-
-
-          # ========================================================
-          # CONTEÚDO NOVO
-          # ========================================================
-
-          replacement = (
-
-              START_MARKER
-
-              +
-
-              "\n\n"
-
-              +
-
-              generated_section
-
-              +
-
-              "\n\n"
-
-              +
-
-              END_MARKER
-
-          )
-
-
-          # ========================================================
-          # SUBSTITUIR APENAS A SEÇÃO WAKATIME
-          # ========================================================
-
-          updated_readme, count = pattern.subn(
-
-              replacement,
-
-              readme,
-
-              count=1
-
-          )
-
-
-          if count != 1:
-
-              raise SystemExit(
-
-                  "ERRO: os marcadores WakaTime "
-
-                  "não foram encontrados exatamente "
-
-                  "uma vez no README.md."
-
-              )
-
-
-          # ========================================================
-          # SALVAR README
-          # ========================================================
-
-          with open(
-
-              README_PATH,
-
-              "w",
-
-              encoding="utf-8",
-
-              newline="\n"
-
-          ) as file:
-
-              file.write(
-                  updated_readme
-              )
-
-
-          print(
-              "README atualizado com sucesso."
-          )
-
-
-          print(
-              f"Período: {start} -> {end}"
-          )
-
-
-          print(
-              f"Tempo total: {total}"
-          )
-
-
-          print(
-              f"Linguagens exibidas: {len(languages)}"
-          )
-
-
+          print(f"WakaTime: {len(languages)} linguagens, total {total}")
+          print(f"GitHub: {len(own_public)} repositórios públicos próprios")
+          print("SVGs gerados em ./assets")
           PY
 
-
-      # ============================================================
-      # 3. Faz commit somente quando houver alteração
-      # ============================================================
-
-      - name: Commit README update
-
+      - name: Commit generated metrics
         run: |
-
-          if git diff --quiet -- README.md; then
-
-            echo "README já está atualizado."
-
+          if git diff --quiet -- assets/; then
+            echo "Métricas já estão atualizadas."
             exit 0
-
           fi
 
-
-          git config \
-            user.name \
-            "github-actions[bot]"
-
-
-          git config \
-            user.email \
-            "41898282+github-actions[bot]@users.noreply.github.com"
-
-
-          git add README.md
-
-
-          git commit \
-            -m "chore: update WakaTime metrics"
-
-
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/
+          git commit -m "chore: update profile metrics"
           git push
