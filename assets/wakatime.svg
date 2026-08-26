@@ -1,76 +1,154 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="920" height="556" viewBox="0 0 920 556" role="img">
+
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="920"
+      height="556"
+      viewBox="0 0 920 556"
+      role="img"
+    >
+
     
+
     <style>
-      .bg { fill: #ffffff; stroke: #d0d7de; }
-      .title { fill: #1f2328; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; font-weight: 700; }
-      .text { fill: #24292f; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; }
-      .muted { fill: #656d76; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; }
-      .mono { fill: #24292f; font-family: ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace; }
-      .track { fill: #eaeef2; }
-      .box { fill: #f6f8fa; stroke: #d8dee4; }
-      @media (prefers-color-scheme: dark) {
-        .bg { fill: #0d1117; stroke: #30363d; }
-        .title { fill: #f0f6fc; }
-        .text { fill: #c9d1d9; }
-        .muted { fill: #8b949e; }
-        .mono { fill: #c9d1d9; }
-        .track { fill: #21262d; }
-        .box { fill: #161b22; stroke: #30363d; }
+
+      .bg {
+        fill: #ffffff;
+        stroke: #d0d7de;
       }
+
+      .title {
+        fill: #1f2328;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+        font-weight: 700;
+      }
+
+      .text {
+        fill: #24292f;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+      }
+
+      .muted {
+        fill: #656d76;
+        font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+      }
+
+      .mono {
+        fill: #24292f;
+        font-family: ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;
+      }
+
+      .track {
+        fill: #eaeef2;
+      }
+
+      .box {
+        fill: #f6f8fa;
+        stroke: #d8dee4;
+      }
+
+
+      @media (prefers-color-scheme: dark) {
+
+        .bg {
+          fill: #0d1117;
+          stroke: #30363d;
+        }
+
+        .title {
+          fill: #f0f6fc;
+        }
+
+        .text {
+          fill: #c9d1d9;
+        }
+
+        .muted {
+          fill: #8b949e;
+        }
+
+        .mono {
+          fill: #c9d1d9;
+        }
+
+        .track {
+          fill: #21262d;
+        }
+
+        .box {
+          fill: #161b22;
+          stroke: #30363d;
+        }
+
+      }
+
     </style>
+
     
-    <rect class="bg" x="0.5" y="0.5" width="919" height="555" rx="12"/>
+
+    <rect
+      class="bg"
+      x="0.5"
+      y="0.5"
+      width="919"
+      height="555"
+      rx="12"
+    />
+
     <text class="title" x="30" y="36" font-size="20">WakaTime — Atividade de Desenvolvimento</text>
-<text class="muted" x="30" y="61" font-size="13">26/07/2026 — 25/08/2026 · últimos 30 dias</text>
+<text class="muted" x="30" y="61" font-size="13">27/07/2026 — 26/08/2026 · últimos 30 dias</text>
 <rect class="box" x="690" y="22" width="200" height="58" rx="9"/>
 <text class="muted" x="708" y="43" font-size="10" font-weight="600">TEMPO TOTAL RASTREADO</text>
-<text class="title" x="708" y="66" font-size="17">39 hrs 43 mins</text>
+<text class="title" x="708" y="66" font-size="17">41 hrs 59 mins</text>
 <circle cx="38" cy="119" r="5" fill="#3178C6"/>
 <text class="text" x="52" y="124" font-size="13" font-weight="600">TypeScript</text>
 <text class="muted" x="190" y="124" font-size="12">11 hrs 10 mins</text>
 <rect class="track" x="330" y="112" width="430" height="14" rx="7"/>
-<rect x="330" y="112" width="121.0" height="14" rx="7" fill="#3178C6"/>
-<text class="mono" x="785" y="124" font-size="12">28.14%</text>
-<circle cx="38" cy="169" r="5" fill="#00599C"/>
-<text class="text" x="52" y="174" font-size="13" font-weight="600">C++</text>
-<text class="muted" x="190" y="174" font-size="12">6 hrs 11 mins</text>
+<rect x="330" y="112" width="114.5" height="14" rx="7" fill="#3178C6"/>
+<text class="mono" x="785" y="124" font-size="12">26.63%</text>
+<circle cx="38" cy="169" r="5" fill="#6E7681"/>
+<text class="text" x="52" y="174" font-size="13" font-weight="600">Other</text>
+<text class="muted" x="190" y="174" font-size="12">6 hrs 45 mins</text>
 <rect class="track" x="330" y="162" width="430" height="14" rx="7"/>
-<rect x="330" y="162" width="67.1" height="14" rx="7" fill="#00599C"/>
-<text class="mono" x="785" y="174" font-size="12">15.60%</text>
-<circle cx="38" cy="219" r="5" fill="#6E7681"/>
-<text class="text" x="52" y="224" font-size="13" font-weight="600">Other</text>
-<text class="muted" x="190" y="224" font-size="12">5 hrs 5 mins</text>
+<rect x="330" y="162" width="69.2" height="14" rx="7" fill="#6E7681"/>
+<text class="mono" x="785" y="174" font-size="12">16.09%</text>
+<circle cx="38" cy="219" r="5" fill="#00599C"/>
+<text class="text" x="52" y="224" font-size="13" font-weight="600">C++</text>
+<text class="muted" x="190" y="224" font-size="12">6 hrs 11 mins</text>
 <rect class="track" x="330" y="212" width="430" height="14" rx="7"/>
-<rect x="330" y="212" width="55.0" height="14" rx="7" fill="#6E7681"/>
-<text class="mono" x="785" y="224" font-size="12">12.80%</text>
+<rect x="330" y="212" width="63.5" height="14" rx="7" fill="#00599C"/>
+<text class="mono" x="785" y="224" font-size="12">14.76%</text>
 <circle cx="38" cy="269" r="5" fill="#3776AB"/>
 <text class="text" x="52" y="274" font-size="13" font-weight="600">Python</text>
 <text class="muted" x="190" y="274" font-size="12">4 hrs</text>
 <rect class="track" x="330" y="262" width="430" height="14" rx="7"/>
-<rect x="330" y="262" width="43.3" height="14" rx="7" fill="#3776AB"/>
-<text class="mono" x="785" y="274" font-size="12">10.08%</text>
+<rect x="330" y="262" width="41.0" height="14" rx="7" fill="#3776AB"/>
+<text class="mono" x="785" y="274" font-size="12"> 9.54%</text>
 <circle cx="38" cy="319" r="5" fill="#083FA1"/>
 <text class="text" x="52" y="324" font-size="13" font-weight="600">Markdown</text>
 <text class="muted" x="190" y="324" font-size="12">3 hrs 16 mins</text>
 <rect class="track" x="330" y="312" width="430" height="14" rx="7"/>
-<rect x="330" y="312" width="35.4" height="14" rx="7" fill="#083FA1"/>
-<text class="mono" x="785" y="324" font-size="12"> 8.23%</text>
+<rect x="330" y="312" width="33.5" height="14" rx="7" fill="#083FA1"/>
+<text class="mono" x="785" y="324" font-size="12"> 7.79%</text>
 <circle cx="38" cy="369" r="5" fill="#5391FE"/>
 <text class="text" x="52" y="374" font-size="13" font-weight="600">PowerShell</text>
 <text class="muted" x="190" y="374" font-size="12">2 hrs 5 mins</text>
 <rect class="track" x="330" y="362" width="430" height="14" rx="7"/>
-<rect x="330" y="362" width="22.7" height="14" rx="7" fill="#5391FE"/>
-<text class="mono" x="785" y="374" font-size="12"> 5.28%</text>
+<rect x="330" y="362" width="21.5" height="14" rx="7" fill="#5391FE"/>
+<text class="mono" x="785" y="374" font-size="12"> 4.99%</text>
 <circle cx="38" cy="419" r="5" fill="#0175C2"/>
 <text class="text" x="52" y="424" font-size="13" font-weight="600">Dart</text>
-<text class="muted" x="190" y="424" font-size="12">1 hr 23 mins</text>
+<text class="muted" x="190" y="424" font-size="12">1 hr 59 mins</text>
 <rect class="track" x="330" y="412" width="430" height="14" rx="7"/>
-<rect x="330" y="412" width="15.1" height="14" rx="7" fill="#0175C2"/>
-<text class="mono" x="785" y="424" font-size="12"> 3.51%</text>
+<rect x="330" y="412" width="20.4" height="14" rx="7" fill="#0175C2"/>
+<text class="mono" x="785" y="424" font-size="12"> 4.74%</text>
 <circle cx="38" cy="469" r="5" fill="#6E7681"/>
 <text class="text" x="52" y="474" font-size="13" font-weight="600">JSON</text>
 <text class="muted" x="190" y="474" font-size="12">1 hr 14 mins</text>
 <rect class="track" x="330" y="462" width="430" height="14" rx="7"/>
-<rect x="330" y="462" width="13.5" height="14" rx="7" fill="#6E7681"/>
-<text class="mono" x="785" y="474" font-size="12"> 3.14%</text>
+<rect x="330" y="462" width="12.8" height="14" rx="7" fill="#6E7681"/>
+<text class="mono" x="785" y="474" font-size="12"> 2.97%</text>
+
     </svg>
+
+    
