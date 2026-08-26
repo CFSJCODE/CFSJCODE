@@ -3,13 +3,9 @@ name: WakaTime Metrics
 on:
   workflow_dispatch:
 
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/waka-readme.yml"
-
   schedule:
+    # Executa diariamente às 03:00 UTC
+    # Aproximadamente 00:00 em Brasília (UTC-3)
     - cron: "0 3 * * *"
 
 permissions:
@@ -17,99 +13,471 @@ permissions:
 
 jobs:
   update-readme:
+
     name: Update WakaTime Metrics
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone profile repository
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git clone "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+
+      # ============================================================
+      # 1. Baixa o repositório do perfil
+      # ============================================================
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+        with:
+          fetch-depth: 0
+
+      # ============================================================
+      # 2. Consulta a API do WakaTime
+      #    e gera a seção visual do README
+      # ============================================================
 
       - name: Fetch WakaTime data and update README
         env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+
         run: |
-          cd repo
+
           python3 - <<'PY'
+
           import base64
           import json
           import os
           import re
           import urllib.request
 
-          api_key = os.environ.get("WAKATIME_API_KEY", "").strip()
-          if not api_key:
-              raise SystemExit("WAKATIME_API_KEY secret is not configured.")
 
-          url = "https://wakatime.com/api/v1/users/current/stats/last_30_days"
-          request = urllib.request.Request(url)
-          token = base64.b64encode(api_key.encode("utf-8")).decode("ascii")
-          request.add_header("Authorization", f"Basic {token}")
-          request.add_header("Accept", "application/json")
+          # ========================================================
+          # CONFIGURAÇÕES
+          # ========================================================
 
-          with urllib.request.urlopen(request, timeout=30) as response:
-              payload = json.load(response)
+          README_PATH = "README.md"
 
-          data = payload.get("data", {})
-          languages = data.get("languages", [])[:8]
-          total = data.get("human_readable_total_including_other_language") or data.get("human_readable_total") or "0 secs"
-          start = str(data.get("start", ""))[:10]
-          end = str(data.get("end", ""))[:10]
+          START_MARKER = "<!--START_SECTION:waka-->"
+          END_MARKER = "<!--END_SECTION:waka-->"
 
-          if not languages:
-              body = "_Ainda não há atividade de programação suficiente registrada pelo WakaTime neste período._"
-          else:
-              longest = max(len(str(lang.get("name", ""))) for lang in languages)
-              rows = []
-              for lang in languages:
-                  name = str(lang.get("name", "Unknown"))
-                  text = str(lang.get("text", "0 secs"))
-                  percent = float(lang.get("percent", 0) or 0)
-                  filled = max(0, min(25, round(percent / 4)))
-                  bar = "█" * filled + "░" * (25 - filled)
-                  rows.append(f"{name:<{longest}}   {text:>12}   {bar}   {percent:5.2f} %")
-              body = "```text\n" + "\n".join(rows) + "\n```"
+          TIME_RANGE = "last_30_days"
 
-          range_line = f"**Período:** {start} → {end}  " if start and end else ""
-          generated = (
-              f"{range_line}\n"
-              f"**Tempo total de desenvolvimento:** {total}\n\n"
-              f"{body}"
+          MAX_LANGUAGES = 8
+
+          BAR_WIDTH = 24
+
+
+          # ========================================================
+          # CHAVE DO WAKATIME
+          # ========================================================
+
+          api_key = os.environ.get(
+              "WAKATIME_API_KEY",
+              ""
           ).strip()
 
-          path = "README.md"
-          with open(path, "r", encoding="utf-8") as file:
+
+          if not api_key:
+
+              raise SystemExit(
+                  "ERRO: o secret WAKATIME_API_KEY "
+                  "não está configurado no GitHub."
+              )
+
+
+          # ========================================================
+          # CONSULTA À API DO WAKATIME
+          # ========================================================
+
+          url = (
+              "https://wakatime.com/api/v1/"
+              f"users/current/stats/{TIME_RANGE}"
+          )
+
+
+          request = urllib.request.Request(url)
+
+
+          token = base64.b64encode(
+              api_key.encode("utf-8")
+          ).decode("ascii")
+
+
+          request.add_header(
+              "Authorization",
+              f"Basic {token}"
+          )
+
+
+          request.add_header(
+              "Accept",
+              "application/json"
+          )
+
+
+          request.add_header(
+              "User-Agent",
+              "CFSJCODE-WakaTime-README"
+          )
+
+
+          try:
+
+              with urllib.request.urlopen(
+                  request,
+                  timeout=30
+              ) as response:
+
+                  payload = json.load(response)
+
+          except Exception as error:
+
+              raise SystemExit(
+                  f"Erro consultando WakaTime: {error}"
+              )
+
+
+          # ========================================================
+          # EXTRAÇÃO DOS DADOS
+          # ========================================================
+
+          data = payload.get("data", {})
+
+
+          languages = data.get(
+              "languages",
+              []
+          )[:MAX_LANGUAGES]
+
+
+          total = (
+              data.get(
+                  "human_readable_total_including_other_language"
+              )
+              or data.get(
+                  "human_readable_total"
+              )
+              or "0 secs"
+          )
+
+
+          start = str(
+              data.get("start", "")
+          )[:10]
+
+
+          end = str(
+              data.get("end", "")
+          )[:10]
+
+
+          # ========================================================
+          # FUNÇÃO PARA CONSTRUIR AS BARRAS
+          # ========================================================
+
+          def make_bar(percent):
+
+              percent = max(
+                  0.0,
+                  min(
+                      100.0,
+                      float(percent)
+                  )
+              )
+
+
+              filled = round(
+                  BAR_WIDTH *
+                  percent /
+                  100
+              )
+
+
+              empty = (
+                  BAR_WIDTH -
+                  filled
+              )
+
+
+              return (
+                  "█" * filled +
+                  "░" * empty
+              )
+
+
+          # ========================================================
+          # CONSTRUÇÃO DA SEÇÃO DO WAKATIME
+          # ========================================================
+
+          lines = []
+
+
+          lines.append(
+              "### WakaTime — Atividade de Desenvolvimento"
+          )
+
+
+          lines.append("")
+
+
+          if start and end:
+
+              lines.append(
+                  f"> **Período:** {start} → {end}  "
+              )
+
+
+          lines.append(
+              "> **Tempo total de desenvolvimento:** "
+              f"**{total}**"
+          )
+
+
+          lines.append("")
+
+
+          if languages:
+
+
+              lines.append(
+                  "| Linguagem | Tempo | Distribuição | Uso |"
+              )
+
+
+              lines.append(
+                  "|:---|---:|:---|---:|"
+              )
+
+
+              for language in languages:
+
+
+                  name = str(
+                      language.get(
+                          "name",
+                          "Unknown"
+                      )
+                  )
+
+
+                  time = str(
+                      language.get(
+                          "text",
+                          "0 secs"
+                      )
+                  )
+
+
+                  percent = float(
+                      language.get(
+                          "percent",
+                          0
+                      )
+                      or 0
+                  )
+
+
+                  bar = make_bar(
+                      percent
+                  )
+
+
+                  lines.append(
+
+                      f"| **{name}** "
+
+                      f"| {time} "
+
+                      f"| `{bar}` "
+
+                      f"| **{percent:.2f}%** |"
+
+                  )
+
+
+          else:
+
+
+              lines.append(
+                  "_Ainda não há atividade de programação "
+                  "suficiente registrada pelo WakaTime "
+                  "neste período._"
+              )
+
+
+          generated_section = "\n".join(
+              lines
+          )
+
+
+          # ========================================================
+          # ABRIR README
+          # ========================================================
+
+          with open(
+              README_PATH,
+              "r",
+              encoding="utf-8"
+          ) as file:
+
               readme = file.read()
 
+
+          # ========================================================
+          # LOCALIZAR A SEÇÃO WAKATIME
+          # ========================================================
+
           pattern = re.compile(
-              r"<!--START_SECTION:waka-->.*?<!--END_SECTION:waka-->",
-              flags=re.DOTALL,
+
+              re.escape(
+                  START_MARKER
+              )
+
+              +
+
+              r".*?"
+
+              +
+
+              re.escape(
+                  END_MARKER
+              ),
+
+              flags=re.DOTALL
+
           )
+
+
+          # ========================================================
+          # CONTEÚDO NOVO
+          # ========================================================
+
           replacement = (
-              "<!--START_SECTION:waka-->\n"
-              + generated
-              + "\n<!--END_SECTION:waka-->"
+
+              START_MARKER
+
+              +
+
+              "\n\n"
+
+              +
+
+              generated_section
+
+              +
+
+              "\n\n"
+
+              +
+
+              END_MARKER
+
           )
 
-          updated, count = pattern.subn(replacement, readme, count=1)
-          if count != 1:
-              raise SystemExit("WakaTime markers were not found exactly once in README.md.")
 
-          with open(path, "w", encoding="utf-8", newline="\n") as file:
-              file.write(updated)
+          # ========================================================
+          # SUBSTITUIR APENAS A SEÇÃO WAKATIME
+          # ========================================================
+
+          updated_readme, count = pattern.subn(
+
+              replacement,
+
+              readme,
+
+              count=1
+
+          )
+
+
+          if count != 1:
+
+              raise SystemExit(
+
+                  "ERRO: os marcadores WakaTime "
+
+                  "não foram encontrados exatamente "
+
+                  "uma vez no README.md."
+
+              )
+
+
+          # ========================================================
+          # SALVAR README
+          # ========================================================
+
+          with open(
+
+              README_PATH,
+
+              "w",
+
+              encoding="utf-8",
+
+              newline="\n"
+
+          ) as file:
+
+              file.write(
+                  updated_readme
+              )
+
+
+          print(
+              "README atualizado com sucesso."
+          )
+
+
+          print(
+              f"Período: {start} -> {end}"
+          )
+
+
+          print(
+              f"Tempo total: {total}"
+          )
+
+
+          print(
+              f"Linguagens exibidas: {len(languages)}"
+          )
+
+
           PY
 
+
+      # ============================================================
+      # 3. Faz commit somente quando houver alteração
+      # ============================================================
+
       - name: Commit README update
+
         run: |
-          cd repo
+
           if git diff --quiet -- README.md; then
-            echo "README is already up to date."
+
+            echo "README já está atualizado."
+
             exit 0
+
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+
+          git config \
+            user.name \
+            "github-actions[bot]"
+
+
+          git config \
+            user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+
           git add README.md
-          git commit -m "chore: update WakaTime metrics"
-          git push origin HEAD:main
+
+
+          git commit \
+            -m "chore: update WakaTime metrics"
+
+
+          git push
