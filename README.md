@@ -85,7 +85,9 @@ Também atuo por meio da **CFSJ TECH**, desenvolvendo projetos e soluções rela
 ## Projetos em destaque
 
 <table>
+
 <tr>
+
 <td width="50%" valign="top">
 
 ### [Aegis Rover](https://github.com/CFSJCODE/AegisRover)
@@ -95,17 +97,21 @@ Plataforma de **robótica móvel baseada em ESP32**, integrando controle de movi
 `ESP32` `FreeRTOS` `LiDAR` `MQTT` `Robótica`
 
 </td>
+
 <td width="50%" valign="top">
 
-### [Embedded Systems Lab](https://github.com/CFSJCODE/embedded-systems-arduino-esp32-lab)
+### [HUB Da Robótica](https://github.com/CFSJCODE/HUB_Da_Robotica)
 
-Laboratório técnico dedicado ao estudo, documentação e experimentação com **Arduino, ESP32, eletrônica e sistemas embarcados**.
+Plataforma web acadêmica desenvolvida para **centralizar competições, equipes, projetos e informações do ecossistema brasileiro de robótica**, integrando catálogo de eventos, favoritos, métricas, autenticação didática e gerenciamento administrativo.
 
-`Arduino` `ESP32` `C/C++` `IoT`
+`JavaScript` `Tailwind CSS` `JSON Server` `GitHub Pages` `Robótica`
 
 </td>
+
 </tr>
+
 <tr>
+
 <td width="50%" valign="top">
 
 ### [CMRS](https://github.com/CFSJCODE/central-monitoramento-redes-servicos-cmrs)
@@ -115,16 +121,19 @@ Projeto voltado ao **monitoramento de redes, hosts e serviços**, explorando dis
 `Networking` `Monitoring` `Infrastructure`
 
 </td>
+
 <td width="50%" valign="top">
 
-### [Teen Wolf](https://github.com/CFSJCODE/Teen-Wolf)
+### [WinReg USB Auditor](https://github.com/CFSJCODE/WinReg_USB_Auditor)
 
-Plataforma institucional desenvolvida para uma equipe de **robótica FIRST LEGO League**, aproximando desenvolvimento web, comunicação e educação tecnológica.
+Ferramenta desenvolvida em **Python para auditoria e forense digital de artefatos USB no Registro do Windows**, automatizando a extração de metadados de dispositivos e a geração de relatórios para análise autorizada.
 
-`Web` `FLL` `STEM` `Robótica`
+`Python` `Windows Registry` `Digital Forensics` `USB` `Cybersecurity`
 
 </td>
+
 </tr>
+
 </table>
 
 <div align="center">
@@ -184,6 +193,7 @@ O GitHub apresenta o resultado dos projetos; o **WakaTime registra o processo de
 ---
 
 <details>
+
 <summary><strong>Princípios que orientam meu trabalho</strong></summary>
 
 <br>
