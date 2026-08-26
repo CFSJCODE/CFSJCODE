@@ -118,9 +118,7 @@ jobs:
               </svg>'''
               (ASSETS / name).write_text(svg, encoding="utf-8", newline="\n")
 
-          # ---------------------------------------------------------
           # WakaTime
-          # ---------------------------------------------------------
           waka_key = os.environ.get("WAKATIME_API_KEY", "").strip()
           if not waka_key:
               raise SystemExit("Secret WAKATIME_API_KEY não configurado.")
@@ -177,9 +175,7 @@ jobs:
 
           write_svg("wakatime.svg", "\n".join(parts), height)
 
-          # ---------------------------------------------------------
           # GitHub public metrics
-          # ---------------------------------------------------------
           gh_token = os.environ.get("GH_TOKEN", "").strip()
           login = os.environ.get("GITHUB_LOGIN", "CFSJCODE").strip()
           gh_headers = {
@@ -222,7 +218,6 @@ jobs:
               ])
           write_svg("github-overview.svg", "\n".join(overview), overview_h)
 
-          # Aggregate language bytes from original public repositories.
           language_totals = {}
           for repo in own_public:
               full_name = repo.get("full_name")
@@ -275,7 +270,9 @@ jobs:
 
       - name: Commit generated metrics
         run: |
-          if git diff --quiet -- assets/; then
+          # `git diff` não inclui arquivos novos/untracked. `git status --porcelain`
+          # detecta tanto arquivos novos quanto alterações nos SVGs existentes.
+          if [ -z "$(git status --porcelain -- assets/)" ]; then
             echo "Métricas já estão atualizadas."
             exit 0
           fi
