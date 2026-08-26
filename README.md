@@ -55,6 +55,7 @@ Também atuo por meio da **CFSJ TECH**, desenvolvendo projetos e soluções rela
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
 </p>
 
 ### Sistemas Embarcados & Robótica
@@ -94,7 +95,6 @@ Plataforma de **robótica móvel baseada em ESP32**, integrando controle de movi
 `ESP32` `FreeRTOS` `LiDAR` `MQTT` `Robótica`
 
 </td>
-
 <td width="50%" valign="top">
 
 ### [Embedded Systems Lab](https://github.com/CFSJCODE/embedded-systems-arduino-esp32-lab)
@@ -105,7 +105,6 @@ Laboratório técnico dedicado ao estudo, documentação e experimentação com 
 
 </td>
 </tr>
-
 <tr>
 <td width="50%" valign="top">
 
@@ -116,7 +115,6 @@ Projeto voltado ao **monitoramento de redes, hosts e serviços**, explorando dis
 `Networking` `Monitoring` `Infrastructure`
 
 </td>
-
 <td width="50%" valign="top">
 
 ### [Teen Wolf](https://github.com/CFSJCODE/Teen-Wolf)
@@ -141,15 +139,7 @@ Plataforma institucional desenvolvida para uma equipe de **robótica FIRST LEGO 
 
 ### CFSJ TECH
 
-Atuação independente em projetos e serviços de tecnologia, abrangendo:
-
-- suporte técnico e diagnóstico de hardware e software;
-- manutenção e configuração de sistemas computacionais;
-- infraestrutura de redes;
-- cabeamento e conectividade;
-- consultoria técnica;
-- integração de hardware e software;
-- desenvolvimento de soluções tecnológicas.
+Atuação independente em projetos e serviços de tecnologia, abrangendo suporte técnico e diagnóstico de hardware e software, manutenção de sistemas computacionais, infraestrutura de redes, conectividade, consultoria técnica e integração entre hardware e software.
 
 ### SESI — Infraestrutura de TI & Robótica
 
@@ -163,27 +153,17 @@ Atuação técnico-pedagógica no ensino de **lógica de programação, Arduino,
 
 ## Métricas de Desenvolvimento
 
-O GitHub representa o resultado dos projetos. O **WakaTime registra o processo de desenvolvimento**, permitindo acompanhar as linguagens e tecnologias efetivamente utilizadas ao longo do tempo.
+O GitHub apresenta o resultado dos projetos; o **WakaTime registra o processo de desenvolvimento**, permitindo observar o tempo efetivamente dedicado a cada linguagem ao longo do período analisado.
 
-### WakaTime — Linguagens por Tempo de Desenvolvimento
+<div align="center">
 
 <!--START_SECTION:waka-->
-**Período:** 2026-07-26 → 2026-08-25  
-**Tempo total de desenvolvimento:** 39 hrs 43 mins
-
-```text
-TypeScript   11 hrs 10 mins   ███████░░░░░░░░░░░░░░░░░░   28.14 %
-C++          6 hrs 11 mins   ████░░░░░░░░░░░░░░░░░░░░░   15.60 %
-Other        5 hrs 5 mins   ███░░░░░░░░░░░░░░░░░░░░░░   12.80 %
-Python              4 hrs   ███░░░░░░░░░░░░░░░░░░░░░░   10.08 %
-Markdown     3 hrs 16 mins   ██░░░░░░░░░░░░░░░░░░░░░░░    8.23 %
-PowerShell   2 hrs 5 mins   █░░░░░░░░░░░░░░░░░░░░░░░░    5.28 %
-Dart         1 hr 23 mins   █░░░░░░░░░░░░░░░░░░░░░░░░    3.51 %
-JSON         1 hr 14 mins   █░░░░░░░░░░░░░░░░░░░░░░░░    3.14 %
-```
+<img src="./assets/wakatime.svg" width="100%" alt="Métricas de desenvolvimento do WakaTime">
 <!--END_SECTION:waka-->
 
-<sub>Esta seção é atualizada automaticamente utilizando dados do WakaTime.</sub>
+</div>
+
+<sub>Atualização automática via GitHub Actions e API do WakaTime. O gráfico representa atividade registrada pelo editor, não o tamanho dos repositórios.</sub>
 
 ---
 
@@ -191,21 +171,15 @@ JSON         1 hr 14 mins   █░░░░░░░░░░░░░░░░�
 
 <div align="center">
 
-<img
-  height="180"
-  src="https://github-readme-stats.vercel.app/api?username=CFSJCODE&show_icons=true&include_all_commits=true&hide_border=true&rank_icon=github&theme=transparent"
-  alt="GitHub Statistics"
-/>
+<img src="./assets/github-overview.svg" width="100%" alt="Resumo de atividade do GitHub">
 
-<img
-  height="180"
-  src="https://github-readme-stats.vercel.app/api/top-langs/?username=CFSJCODE&layout=compact&langs_count=8&hide_border=true&theme=transparent"
-  alt="Repository Languages"
-/>
+<br>
+
+<img src="./assets/github-languages.svg" width="100%" alt="Linguagens dos repositórios públicos">
 
 </div>
 
-> **Nota:** a distribuição de linguagens apresentada pelo GitHub representa a composição dos repositórios. As métricas fornecidas pelo **WakaTime** representam o tempo efetivamente dedicado ao desenvolvimento em cada linguagem.
+> **Leitura das métricas:** o painel do WakaTime mede **tempo de desenvolvimento**; o painel de linguagens do GitHub mede a **composição dos repositórios públicos por bytes de código**. São métricas diferentes e complementares.
 
 ---
 
@@ -232,14 +206,7 @@ Código implementa comportamento. Documentação preserva o conhecimento necess�
 
 ### Iteração como método
 
-Projetos complexos são construídos através de ciclos sucessivos de:
-
-1. modelagem;
-2. implementação;
-3. testes;
-4. identificação de falhas;
-5. análise;
-6. refinamento.
+Projetos complexos evoluem por ciclos sucessivos de **modelagem → implementação → teste → análise → refinamento**.
 
 </details>
 
@@ -256,8 +223,6 @@ Projetos complexos são construídos através de ciclos sucessivos de:
 
 <br>
 
-<sub>
-Hardware · Software · Embedded Systems · Infrastructure · Artificial Intelligence · Robotics
-</sub>
+<sub>Hardware · Software · Embedded Systems · Infrastructure · Artificial Intelligence · Robotics</sub>
 
 </div>
