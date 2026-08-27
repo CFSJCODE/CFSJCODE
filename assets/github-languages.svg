@@ -101,7 +101,7 @@
 <text class="text" x="52" y="124" font-size="13" font-weight="600">HTML</text>
 <rect class="track" x="250" y="112" width="430" height="14" rx="7"/>
 <rect x="250" y="112" width="157.2" height="14" rx="7" fill="#E34C26"/>
-<text class="mono" x="710" y="124" font-size="12">36.56%</text>
+<text class="mono" x="710" y="124" font-size="12">36.57%</text>
 <circle cx="38" cy="169" r="5" fill="#3776AB"/>
 <text class="text" x="52" y="174" font-size="13" font-weight="600">Python</text>
 <rect class="track" x="250" y="162" width="430" height="14" rx="7"/>
@@ -111,7 +111,7 @@
 <text class="text" x="52" y="224" font-size="13" font-weight="600">C++</text>
 <rect class="track" x="250" y="212" width="430" height="14" rx="7"/>
 <rect x="250" y="212" width="43.4" height="14" rx="7" fill="#00599C"/>
-<text class="mono" x="710" y="224" font-size="12">10.10%</text>
+<text class="mono" x="710" y="224" font-size="12">10.09%</text>
 <circle cx="38" cy="269" r="5" fill="#555555"/>
 <text class="text" x="52" y="274" font-size="13" font-weight="600">C</text>
 <rect class="track" x="250" y="262" width="430" height="14" rx="7"/>
