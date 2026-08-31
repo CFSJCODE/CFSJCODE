@@ -99,7 +99,7 @@
 <text class="muted" x="30" y="62" font-size="13">@CFSJCODE · métricas públicas</text>
 <rect class="box" x="30" y="92" width="202" height="92" rx="10"/>
 <text class="muted" x="48" y="120" font-size="11" font-weight="600">REPOSITÓRIOS PÚBLICOS</text>
-<text class="title" x="48" y="159" font-size="27">36</text>
+<text class="title" x="48" y="159" font-size="27">37</text>
 <rect class="box" x="250" y="92" width="202" height="92" rx="10"/>
 <text class="muted" x="268" y="120" font-size="11" font-weight="600">SEGUIDORES</text>
 <text class="title" x="268" y="159" font-size="27">0</text>

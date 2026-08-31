@@ -96,7 +96,7 @@
     />
 
     <text class="title" x="30" y="36" font-size="20">WakaTime — Atividade de Desenvolvimento</text>
-<text class="muted" x="30" y="61" font-size="13">30/07/2026 — 29/08/2026 · últimos 30 dias</text>
+<text class="muted" x="30" y="61" font-size="13">31/07/2026 — 30/08/2026 · últimos 30 dias</text>
 <rect class="box" x="690" y="22" width="200" height="58" rx="9"/>
 <text class="muted" x="708" y="43" font-size="10" font-weight="600">TEMPO TOTAL RASTREADO</text>
 <text class="title" x="708" y="66" font-size="17">47 hrs 36 mins</text>
