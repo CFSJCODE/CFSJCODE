@@ -100,38 +100,38 @@
 <circle cx="38" cy="119" r="5" fill="#E34C26"/>
 <text class="text" x="52" y="124" font-size="13" font-weight="600">HTML</text>
 <rect class="track" x="250" y="112" width="430" height="14" rx="7"/>
-<rect x="250" y="112" width="154.3" height="14" rx="7" fill="#E34C26"/>
-<text class="mono" x="710" y="124" font-size="12">35.87%</text>
+<rect x="250" y="112" width="154.1" height="14" rx="7" fill="#E34C26"/>
+<text class="mono" x="710" y="124" font-size="12">35.83%</text>
 <circle cx="38" cy="169" r="5" fill="#3776AB"/>
 <text class="text" x="52" y="174" font-size="13" font-weight="600">Python</text>
 <rect class="track" x="250" y="162" width="430" height="14" rx="7"/>
-<rect x="250" y="162" width="74.1" height="14" rx="7" fill="#3776AB"/>
-<text class="mono" x="710" y="174" font-size="12">17.22%</text>
+<rect x="250" y="162" width="74.0" height="14" rx="7" fill="#3776AB"/>
+<text class="mono" x="710" y="174" font-size="12">17.20%</text>
 <circle cx="38" cy="219" r="5" fill="#00599C"/>
 <text class="text" x="52" y="224" font-size="13" font-weight="600">C++</text>
 <rect class="track" x="250" y="212" width="430" height="14" rx="7"/>
-<rect x="250" y="212" width="45.6" height="14" rx="7" fill="#00599C"/>
-<text class="mono" x="710" y="224" font-size="12">10.59%</text>
+<rect x="250" y="212" width="45.5" height="14" rx="7" fill="#00599C"/>
+<text class="mono" x="710" y="224" font-size="12">10.58%</text>
 <circle cx="38" cy="269" r="5" fill="#555555"/>
 <text class="text" x="52" y="274" font-size="13" font-weight="600">C</text>
 <rect class="track" x="250" y="262" width="430" height="14" rx="7"/>
-<rect x="250" y="262" width="40.5" height="14" rx="7" fill="#555555"/>
-<text class="mono" x="710" y="274" font-size="12"> 9.41%</text>
+<rect x="250" y="262" width="40.4" height="14" rx="7" fill="#555555"/>
+<text class="mono" x="710" y="274" font-size="12"> 9.40%</text>
 <circle cx="38" cy="319" r="5" fill="#3178C6"/>
 <text class="text" x="52" y="324" font-size="13" font-weight="600">TypeScript</text>
 <rect class="track" x="250" y="312" width="430" height="14" rx="7"/>
-<rect x="250" y="312" width="30.8" height="14" rx="7" fill="#3178C6"/>
-<text class="mono" x="710" y="324" font-size="12"> 7.16%</text>
+<rect x="250" y="312" width="30.7" height="14" rx="7" fill="#3178C6"/>
+<text class="mono" x="710" y="324" font-size="12"> 7.15%</text>
 <circle cx="38" cy="369" r="5" fill="#F1E05A"/>
 <text class="text" x="52" y="374" font-size="13" font-weight="600">JavaScript</text>
 <rect class="track" x="250" y="362" width="430" height="14" rx="7"/>
 <rect x="250" y="362" width="28.6" height="14" rx="7" fill="#F1E05A"/>
-<text class="mono" x="710" y="374" font-size="12"> 6.66%</text>
+<text class="mono" x="710" y="374" font-size="12"> 6.65%</text>
 <circle cx="38" cy="419" r="5" fill="#563D7C"/>
 <text class="text" x="52" y="424" font-size="13" font-weight="600">CSS</text>
 <rect class="track" x="250" y="412" width="430" height="14" rx="7"/>
-<rect x="250" y="412" width="24.5" height="14" rx="7" fill="#563D7C"/>
-<text class="mono" x="710" y="424" font-size="12"> 5.69%</text>
+<rect x="250" y="412" width="24.4" height="14" rx="7" fill="#563D7C"/>
+<text class="mono" x="710" y="424" font-size="12"> 5.68%</text>
 <circle cx="38" cy="469" r="5" fill="#6E7681"/>
 <text class="text" x="52" y="474" font-size="13" font-weight="600">Batchfile</text>
 <rect class="track" x="250" y="462" width="430" height="14" rx="7"/>
