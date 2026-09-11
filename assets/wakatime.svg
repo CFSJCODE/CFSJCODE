@@ -96,58 +96,58 @@
     />
 
     <text class="title" x="30" y="36" font-size="20">WakaTime — Atividade de Desenvolvimento</text>
-<text class="muted" x="30" y="61" font-size="13">10/08/2026 — 09/09/2026 · últimos 30 dias</text>
+<text class="muted" x="30" y="61" font-size="13">11/08/2026 — 10/09/2026 · últimos 30 dias</text>
 <rect class="box" x="690" y="22" width="200" height="58" rx="9"/>
 <text class="muted" x="708" y="43" font-size="10" font-weight="600">TEMPO TOTAL RASTREADO</text>
-<text class="title" x="708" y="66" font-size="17">46 hrs 39 mins</text>
+<text class="title" x="708" y="66" font-size="17">52 hrs 42 mins</text>
 <circle cx="38" cy="119" r="5" fill="#6E7681"/>
 <text class="text" x="52" y="124" font-size="13" font-weight="600">Other</text>
-<text class="muted" x="190" y="124" font-size="12">12 hrs 45 mins</text>
+<text class="muted" x="190" y="124" font-size="12">13 hrs 14 mins</text>
 <rect class="track" x="330" y="112" width="430" height="14" rx="7"/>
-<rect x="330" y="112" width="117.5" height="14" rx="7" fill="#6E7681"/>
-<text class="mono" x="785" y="124" font-size="12">27.33%</text>
+<rect x="330" y="112" width="108.0" height="14" rx="7" fill="#6E7681"/>
+<text class="mono" x="785" y="124" font-size="12">25.11%</text>
 <circle cx="38" cy="169" r="5" fill="#3178C6"/>
 <text class="text" x="52" y="174" font-size="13" font-weight="600">TypeScript</text>
 <text class="muted" x="190" y="174" font-size="12">11 hrs 10 mins</text>
 <rect class="track" x="330" y="162" width="430" height="14" rx="7"/>
-<rect x="330" y="162" width="103.0" height="14" rx="7" fill="#3178C6"/>
-<text class="mono" x="785" y="174" font-size="12">23.96%</text>
+<rect x="330" y="162" width="91.2" height="14" rx="7" fill="#3178C6"/>
+<text class="mono" x="785" y="174" font-size="12">21.21%</text>
 <circle cx="38" cy="219" r="5" fill="#083FA1"/>
 <text class="text" x="52" y="224" font-size="13" font-weight="600">Markdown</text>
-<text class="muted" x="190" y="224" font-size="12">5 hrs 22 mins</text>
+<text class="muted" x="190" y="224" font-size="12">5 hrs 44 mins</text>
 <rect class="track" x="330" y="212" width="430" height="14" rx="7"/>
-<rect x="330" y="212" width="49.5" height="14" rx="7" fill="#083FA1"/>
-<text class="mono" x="785" y="224" font-size="12">11.50%</text>
+<rect x="330" y="212" width="46.8" height="14" rx="7" fill="#083FA1"/>
+<text class="mono" x="785" y="224" font-size="12">10.89%</text>
 <circle cx="38" cy="269" r="5" fill="#3776AB"/>
 <text class="text" x="52" y="274" font-size="13" font-weight="600">Python</text>
-<text class="muted" x="190" y="274" font-size="12">4 hrs 16 mins</text>
+<text class="muted" x="190" y="274" font-size="12">5 hrs 11 mins</text>
 <rect class="track" x="330" y="262" width="430" height="14" rx="7"/>
-<rect x="330" y="262" width="39.4" height="14" rx="7" fill="#3776AB"/>
-<text class="mono" x="785" y="274" font-size="12"> 9.16%</text>
+<rect x="330" y="262" width="42.4" height="14" rx="7" fill="#3776AB"/>
+<text class="mono" x="785" y="274" font-size="12"> 9.86%</text>
 <circle cx="38" cy="319" r="5" fill="#0175C2"/>
 <text class="text" x="52" y="324" font-size="13" font-weight="600">Dart</text>
 <text class="muted" x="190" y="324" font-size="12">3 hrs 4 mins</text>
 <rect class="track" x="330" y="312" width="430" height="14" rx="7"/>
-<rect x="330" y="312" width="28.3" height="14" rx="7" fill="#0175C2"/>
-<text class="mono" x="785" y="324" font-size="12"> 6.58%</text>
+<rect x="330" y="312" width="25.0" height="14" rx="7" fill="#0175C2"/>
+<text class="mono" x="785" y="324" font-size="12"> 5.82%</text>
 <circle cx="38" cy="369" r="5" fill="#6E7681"/>
-<text class="text" x="52" y="374" font-size="13" font-weight="600">SQL</text>
-<text class="muted" x="190" y="374" font-size="12">1 hr 44 mins</text>
+<text class="text" x="52" y="374" font-size="13" font-weight="600">JSON</text>
+<text class="muted" x="190" y="374" font-size="12">2 hrs 35 mins</text>
 <rect class="track" x="330" y="362" width="430" height="14" rx="7"/>
-<rect x="330" y="362" width="16.1" height="14" rx="7" fill="#6E7681"/>
-<text class="mono" x="785" y="374" font-size="12"> 3.75%</text>
+<rect x="330" y="362" width="21.1" height="14" rx="7" fill="#6E7681"/>
+<text class="mono" x="785" y="374" font-size="12"> 4.91%</text>
 <circle cx="38" cy="419" r="5" fill="#6E7681"/>
-<text class="text" x="52" y="424" font-size="13" font-weight="600">JSON</text>
-<text class="muted" x="190" y="424" font-size="12">1 hr 34 mins</text>
+<text class="text" x="52" y="424" font-size="13" font-weight="600">SQL</text>
+<text class="muted" x="190" y="424" font-size="12">2 hrs 4 mins</text>
 <rect class="track" x="330" y="412" width="430" height="14" rx="7"/>
-<rect x="330" y="412" width="14.6" height="14" rx="7" fill="#6E7681"/>
-<text class="mono" x="785" y="424" font-size="12"> 3.39%</text>
+<rect x="330" y="412" width="16.9" height="14" rx="7" fill="#6E7681"/>
+<text class="mono" x="785" y="424" font-size="12"> 3.94%</text>
 <circle cx="38" cy="469" r="5" fill="#F1E05A"/>
 <text class="text" x="52" y="474" font-size="13" font-weight="600">JavaScript</text>
-<text class="muted" x="190" y="474" font-size="12">1 hr 27 mins</text>
+<text class="muted" x="190" y="474" font-size="12">1 hr 42 mins</text>
 <rect class="track" x="330" y="462" width="430" height="14" rx="7"/>
-<rect x="330" y="462" width="13.5" height="14" rx="7" fill="#F1E05A"/>
-<text class="mono" x="785" y="474" font-size="12"> 3.14%</text>
+<rect x="330" y="462" width="13.9" height="14" rx="7" fill="#F1E05A"/>
+<text class="mono" x="785" y="474" font-size="12"> 3.23%</text>
 
     </svg>
 
